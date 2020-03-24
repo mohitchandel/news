@@ -138,10 +138,10 @@ def science(request):
     return render(request, 'science.html', context ={"mylist":mylist})
 
 
-def health(request): 
+def ente(request): 
       
     newsapi = NewsApiClient(api_key ='f776a61cf60744cf9f5473701caea44b') 
-    top = newsapi.get_top_headlines(q="health",sources ='google-news,medical-news-today') 
+    top = newsapi.get_top_headlines(sources ='buzzfeed,entertainment-weekly,ign,mashable,mtv-news') 
   
     l = top['articles'] 
     desc =[] 
@@ -162,5 +162,5 @@ def health(request):
 
     mylist = zip(news, desc, img, link, published, author) 
   
-    return render(request, 'health.html', context ={"mylist":mylist})    
+    return render(request, 'ente.html', context ={"mylist":mylist})    
 
