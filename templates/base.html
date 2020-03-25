@@ -6,6 +6,11 @@
     <title>{% block title %}{% endblock %}</title> 
     <link rel="stylesheet" href="{% static 'bootstrap.min.css' %}" >
     <link rel="stylesheet" href="{% static 'bootstrap.css' %}" >
+    <style>
+      .hide-me {
+        display: none;
+      }
+    </style>
   </head> 
   <body> 
         <div class="container">
@@ -28,12 +33,38 @@
 
           <div class="nav-scroller py-1 mb-2">
             <nav class="nav d-flex justify-content-between">
-              <a class="p-2 text-danger" href="/">Technology</a>
-              <a class="p-2 text-muted" href="/world">World</a>
-              <a class="p-2 text-muted" href="/business">Business</a>
-              <a class="p-2 text-muted" href="/sports">Sports</a>
-              <a class="p-2 text-muted" href="/science">Science</a>
-              <a class="p-2 text-muted" href="/entertainment">Entertainment</a>
+              <a class="p-2 {% block menu_home_class %}{% endblock %}" href="/">Technology</a>
+              <a class="p-2 {% block menu_world_class %}{% endblock %}" href="/world">World</a>
+              <a class="p-2 {% block menu_busin_class %}{% endblock %}" href="/business">Business</a>
+              <a class="p-2 {% block menu_sports_class %}{% endblock %}" href="/sports">Sports</a>
+              <a class="p-2 {% block menu_science_class %}{% endblock %}" href="/science">Science</a>
+              <a class="p-2 {% block menu_ent_class %}{% endblock %}" href="/entertainment">Entertainment</a>
             </nav>
           </div>
           {% block content %}{% endblock %}
+          <div class="text-center my-5">
+            <button class="btn btn-dark rounded-0" id="show-more" onclick="showMore()">Show More</button>
+          </div>
+        </div>
+      </div> 
+    </div>
+    <script>
+      function showMore() {
+          var hiddenPNodes = document.querySelectorAll('.hide-me');
+          // Keep in mind this is an ES6 syntax so browser compatibility should be checked before using it.
+          var first = Array.from(hiddenPNodes).slice(0, 6);
+          first.forEach(element => {
+              element.classList.remove('hide-me');
+          });
+          // Assuming you want to hide the button when all elements are shown.
+          // alert(hiddenPNodes.length);
+          if (hiddenPNodes.length <= 6) {
+              hideShowMoreButton();
+          }
+      }
+      function hideShowMoreButton() {
+          document.getElementById('show-more').style.display = 'none';
+      }
+    </script>
+    </body> 
+    </html> 
